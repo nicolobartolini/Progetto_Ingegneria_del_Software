@@ -20,7 +20,7 @@ class VistaStoricoVernici(QWidget):
         self.v_layout.addWidget(self.lista_vernici)
         self.v_layout.addWidget(self.button_inserisci_vernice)
         self.setLayout(self.v_layout)
-        self.setWindowTitle("Gestione Magazzino")
+        self.setWindowTitle("Storico vernici")
         self.setMinimumSize(700, 900)
 
 

@@ -1,7 +1,5 @@
-from PyQt5.QtCore import QSize, Qt
 from PyQt5.QtGui import QPixmap
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QFormLayout, QLineEdit, QPushButton, QTextEdit, \
-    QDoubleSpinBox, QSpinBox, QSlider, QGridLayout
+from PyQt5.QtWidgets import QWidget, QLabel, QGridLayout
 
 
 class VistaQRCode(QWidget):

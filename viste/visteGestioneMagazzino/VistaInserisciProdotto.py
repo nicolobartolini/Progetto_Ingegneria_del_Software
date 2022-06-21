@@ -1,6 +1,6 @@
-from PyQt5.QtCore import QSize, Qt
+from PyQt5.QtCore import QSize
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QFormLayout, QLineEdit, QPushButton, QTextEdit, \
-    QDoubleSpinBox, QSpinBox, QSlider
+    QDoubleSpinBox, QSpinBox
 
 
 class VistaInserisciProdotto(QWidget):

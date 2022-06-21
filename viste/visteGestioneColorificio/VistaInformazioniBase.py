@@ -3,9 +3,6 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QFormLayout, QPushButt
 
 from viste.visteGestioneColorificio.VistaEliminaBase import VistaEliminaBase
 from viste.visteGestioneColorificio.VistaModificaBase import VistaModificaBase
-from viste.visteGestioneMagazzino.VistaEliminaProdotto import VistaEliminaProdotto
-from viste.visteGestioneMagazzino.VistaModificaProdotto import VistaModificaProdotto
-from viste.visteGestioneMagazzino.VistaQRCode import VistaQRCode
 
 
 class VistaInformazioniBase(QWidget):

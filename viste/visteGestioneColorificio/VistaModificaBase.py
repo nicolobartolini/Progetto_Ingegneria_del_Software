@@ -1,6 +1,5 @@
-from PyQt5.QtCore import QSize, Qt
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QFormLayout, QLineEdit, QPushButton, QTextEdit, \
-    QDoubleSpinBox, QSpinBox, QSlider, QComboBox
+from PyQt5.QtCore import QSize
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QFormLayout, QLineEdit, QPushButton, QDoubleSpinBox, QSpinBox
 
 
 class VistaModificaBase(QWidget):
