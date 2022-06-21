@@ -5,7 +5,6 @@ class VistaEliminaBase(QWidget):
 
     def __init__(self, parent=None):
         super(VistaEliminaBase, self).__init__(parent)
-        print('OK')
         self.v_layout = QVBoxLayout()
         self.label = QLabel('Sei sicuro di voler eliminare la base?')
         self.h_layout = QHBoxLayout()

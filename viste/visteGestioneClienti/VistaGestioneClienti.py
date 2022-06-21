@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton, QHBoxLayout, \
     QListWidget, QComboBox
 
+from viste.visteGestioneClienti.VistaInformazioniCliente import VistaInformazioniCliente
 from viste.visteGestioneClienti.VistaInserisciClienteAzienda import VistaInserisciClienteAzienda
 from viste.visteGestioneClienti.VistaInserisciClientePersona import VistaInserisciClientePersona
 
