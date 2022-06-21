@@ -101,7 +101,7 @@ class GestoreMagazzino:
                                 prodotto_dict['ubicazione']['posizione'])
         dimensione = Dimensione(prodotto_dict['dimensione']['lunghezza'], prodotto_dict['dimensione']['larghezza'],
                                 prodotto_dict['dimensione']['profondita'], prodotto_dict['dimensione']['peso'])
-        fornitore = Fornitore('Gianni srl', 154891205)
+        fornitore = Fornitore(prodotto_dict['fornitore']['marchionimo'], prodotto_dict['fornitore']['partitaIVA'])
         return Prodotto(prodotto_dict['_id'], prodotto_dict['nome'], prodotto_dict['giacenza'], prodotto_dict['prezzo'],
                         ubicazione, dimensione, fornitore, prodotto_dict['note'])
 

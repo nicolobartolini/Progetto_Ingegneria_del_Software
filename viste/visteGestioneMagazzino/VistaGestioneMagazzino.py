@@ -18,7 +18,7 @@ class VistaGestioneMagazzino(QWidget):
         self.tipo_ricerca.addItem('Ricerca per nome')
         self.tipo_ricerca.addItem('Ricerca per ID')
         self.tipo_ricerca.addItem('Ricerca per fornitore')
-        self.button_cerca = QPushButton('Cerca')
+        self.button_cerca = QPushButton('Cerca/Aggiorna')
         self.button_cerca.clicked.connect(lambda: self.ricerca_lista_prodotti('nome', False))
         self.h_layout.addWidget(self.label)
         self.h_layout.addWidget(self.barra_ricerca)

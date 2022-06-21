@@ -1,11 +1,18 @@
+from Fornitore import Fornitore
+
+
 class Base:
 
-    def __init__(self, giacenza: int, nome: str, prezzo_al_litro: float, volume: float, fornitore: Fornitore):
+    def __init__(self, id: int, nome: str, giacenza: int, prezzo_al_litro: float, volume: float, fornitore: Fornitore):
+        self.id = id
         self.giacenza = giacenza
         self.nome = nome
         self.prezzo_al_litro = prezzo_al_litro
         self.volume = volume
         self.fornitore = fornitore
+
+    def get_id(self) -> int:
+        return self.id
 
     def get_giacenza(self) -> int:
         return self.giacenza
