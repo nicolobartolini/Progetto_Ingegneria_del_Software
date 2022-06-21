@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton, QHBoxLayout, \
     QListWidget, QComboBox
 
+from gestione.GestoreMagazzino import GestoreMagazzino
 from viste.visteGestioneMagazzino.VistaInformazioniProdotto import VistaInformazioniProdotto
 from viste.visteGestioneMagazzino.VistaInserisciProdotto import VistaInserisciProdotto
 
@@ -26,9 +27,10 @@ class VistaGestioneMagazzino(QWidget):
         self.h_layout_2.addWidget(self.scelta_ordinamento_cbox)
         self.h_layout_2.addWidget(self.button_cambia_ordinamento)  # DA RIVEDERE DISPOSIZIONE
         self.lista_prodotti = QListWidget()
-        self.lista_prodotti.addItem('prova')
-        self.lista_prodotti.addItem('prova2')
-        self.lista_prodotti.itemActivated.connect(self.prova)
+        GestoreMagazzino.aggiorna_database_prodotti()
+        for prodotto in GestoreMagazzino.database_prodotti:
+            self.lista_prodotti.addItem(f'{str(prodotto["_id"])} | {str(prodotto["nome"])} | Giacenza: {str(prodotto["giacenza"])} | Prezzo: {str(prodotto["prezzo"])}')
+        self.lista_prodotti.itemActivated.connect(self.open_informazioni_prodotto)
         self.button_inserisci_prodotto = QPushButton('Inserisci prodotto...')
         self.button_inserisci_prodotto.clicked.connect(self.open_inserisci_prodotto)
         self.v_layout.addLayout(self.h_layout)
@@ -44,6 +46,12 @@ class VistaGestioneMagazzino(QWidget):
         self.vista_inserisci_prodotto = VistaInserisciProdotto()
         self.vista_inserisci_prodotto.show()
 
-    def prova(self, item):
-        self.vista_informazioni_prodotto = VistaInformazioniProdotto()
+    def open_informazioni_prodotto(self, item):
+        prodotto_dict = {}
+        id_prodotto = int(item.text().split(' ')[0])
+        for prodotto in GestoreMagazzino.database_prodotti:
+            if prodotto['_id'] == id_prodotto:
+                prodotto_dict = prodotto
+                break
+        self.vista_informazioni_prodotto = VistaInformazioniProdotto(prodotto=prodotto_dict)
         self.vista_informazioni_prodotto.show()

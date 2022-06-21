@@ -2,6 +2,13 @@ from PyQt5.QtCore import QSize
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QFormLayout, QLineEdit, QPushButton, QTextEdit, \
     QDoubleSpinBox, QSpinBox
 
+from Dimensione import Dimensione
+from Fornitore import Fornitore
+from Prodotto import Prodotto
+from Ubicazione import Ubicazione
+from gestione.GestoreMagazzino import GestoreMagazzino
+from viste.VistaMessaggioGenerico import VistaMessaggioGenerico
+
 
 class VistaInserisciProdotto(QWidget):
 
@@ -46,15 +53,33 @@ class VistaInserisciProdotto(QWidget):
         self.f_layout.addRow('Profondità (cm):', self.input_profondita)
         self.f_layout.addRow('Peso (kg):', self.input_peso)
         self.f_layout.addRow('Note:', self.input_note)
-        self.button_login = QPushButton('Inserisci prodotto')
-        self.button_login.clicked.connect(self.check_login)
+        self.button_inserisci_prodotto = QPushButton('Inserisci prodotto')
+        self.button_inserisci_prodotto.clicked.connect(self.inserisci_prodotto)
         self.v_layout.addWidget(self.label)
         self.v_layout.addLayout(self.f_layout)
-        self.v_layout.addWidget(self.button_login)
+        self.v_layout.addWidget(self.button_inserisci_prodotto)
         self.setLayout(self.v_layout)
         self.setWindowTitle("Inserimento prodotto")
         self.setMinimumSize(QSize(400, 450))
         self.setMaximumHeight(450)
 
-    def check_login(self):
-        pass
+    def inserisci_prodotto(self):
+        nome = self.input_nome.text()
+        prezzo = self.input_prezzo.value()
+        giacenza = self.input_giacenza.value()
+        numero_scaffale = self.input_numero_scaffale.value()
+        livello = self.input_livello.value()
+        posizione = self.input_posizione.value()
+        ubicazione = Ubicazione(numero_scaffale, livello, posizione)
+        lunghezza = self.input_lunghezza.value()
+        larghezza = self.input_larghezza.value()
+        profondita = self.input_profondita.value()
+        peso = self.input_peso.value()
+        dimensione = Dimensione(lunghezza, larghezza, profondita, peso)
+        fornitore = Fornitore('Gianni srl', 131414132)
+        note = self.input_note.toPlainText()
+        nuovo_prodotto = Prodotto(GestoreMagazzino.get_prossimo_id_prodotto(), nome, giacenza, prezzo, ubicazione, dimensione, fornitore, note)
+        GestoreMagazzino.aggiungi_prodotto(nuovo_prodotto)
+        self.messaggio_conferma = VistaMessaggioGenerico(msg='Prodotto inserito con successo!')
+        self.messaggio_conferma.show()
+        self.close()

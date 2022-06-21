@@ -1,8 +1,8 @@
 class Ubicazione():
 
-    def __init__(self, livello: int, numero_scaffale: int, posizione: int):
-        self.livello = livello
+    def __init__(self, numero_scaffale: int, livello: int, posizione: int):
         self.numero_scaffale = numero_scaffale
+        self.livello = livello
         self.posizione = posizione
 
     def get_livello(self) -> int:
@@ -22,3 +22,6 @@ class Ubicazione():
 
     def set_posizione(self, posizione: int):
         self.posizione = posizione
+
+    def __str__(self):
+        return f'Scaffale {self.numero_scaffale}, livello {self.livello}, posizione {self.posizione}'

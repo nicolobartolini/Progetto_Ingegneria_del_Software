@@ -1,17 +1,24 @@
 import datetime
+import qrcode as qr
+from PIL import *
+
+from Dimensione import Dimensione
+from Fornitore import Fornitore
+from Ubicazione import Ubicazione
 
 
 class Prodotto():
 
-    def __init__(self, nome: str,  giacenza: int, id: int, note: str, ubicazione: Ubicazione, dimensione: Dimensione, fornitore: Fornitore):
+    def __init__(self, id: int, nome: str,  giacenza: int, prezzo: float, ubicazione: Ubicazione, dimensione: Dimensione, fornitore: Fornitore, note: str):
+        self.id = id
         self.nome = nome
         self.data_immagazzinamento = datetime.datetime.now()
         self.giacenza = giacenza
-        self.id = id
-        self.note = note
+        self.prezzo = prezzo
         self.ubicazione = ubicazione
         self.dimensione = dimensione
         self.fornitore = fornitore
+        self.note = note
 
     def get_nome(self) -> str:
         return self.nome
@@ -30,6 +37,12 @@ class Prodotto():
 
     def set_giacenza(self, giacenza: int):
         self.giacenza = giacenza
+
+    def get_prezzo(self) -> float:
+        return self.prezzo
+
+    def set_prezzo(self, prezzo: float):
+        self.prezzo = prezzo
 
     def get_id(self) -> int:
         return self.id
@@ -57,3 +70,6 @@ class Prodotto():
 
     def set_fornitore(self, fornitore: Fornitore):
         self.fornitore = fornitore
+
+    def creaQR(self):
+        return qr.make(str(self.ubicazione))

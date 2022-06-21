@@ -1,6 +1,6 @@
 class Dimensione():
 
-    def __init__(self, larghezza: float, lunghezza: float, profondita: float, peso: float):
+    def __init__(self, lunghezza: float, larghezza: float, profondita: float, peso: float):
         self.larghezza = larghezza
         self.lunghezza = lunghezza
         self.profondita = profondita
