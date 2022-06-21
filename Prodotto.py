@@ -1,6 +1,6 @@
 import datetime
+
 import qrcode as qr
-from PIL import *
 
 from Dimensione import Dimensione
 from Fornitore import Fornitore

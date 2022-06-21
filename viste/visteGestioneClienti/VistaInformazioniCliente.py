@@ -3,8 +3,6 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QFormLayout, QPushButt
 
 from viste.visteGestioneClienti.VistaEliminaCliente import VistaEliminaCliente
 from viste.visteGestioneClienti.VistaModificaCliente import VistaModificaCliente
-from viste.visteGestioneColorificio.VistaEliminaBase import VistaEliminaBase
-from viste.visteGestioneColorificio.VistaModificaBase import VistaModificaBase
 
 
 class VistaInformazioniCliente(QWidget):

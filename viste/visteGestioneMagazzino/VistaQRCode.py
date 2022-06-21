@@ -1,6 +1,6 @@
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QWidget, QLabel, QGridLayout
-from PIL import *
+
 from gestione.GestoreMagazzino import GestoreMagazzino
 
 

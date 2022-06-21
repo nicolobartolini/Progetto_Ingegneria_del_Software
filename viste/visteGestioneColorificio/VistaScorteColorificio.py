@@ -21,7 +21,7 @@ class VistaScorteColorificio(QWidget):
         self.h_layout.addWidget(self.barra_ricerca)
         self.h_layout.addWidget(self.button_cerca)
         self.lista_basi = QListWidget()
-        GestoreColorificio.aggiorna_database_colorificio()
+        GestoreColorificio.aggiorna_database_gestore_colorificio()
         self.set_lista_basi(GestoreColorificio.database_basi)
         self.lista_basi.itemActivated.connect(self.open_informazioni_base)
         self.button_inserisci_base = QPushButton('Inserisci base...')

@@ -16,19 +16,23 @@ class GestoreColorificio:
     colorante_giallo = None
 
     @staticmethod
-    def get_prezzo_al_litro_coloranti() -> float:
-        return GestoreColorificio.prezzo_al_litro_coloranti
-
-    @staticmethod
-    def aggiorna_database_colorificio():
+    def aggiorna_database_gestore_colorificio():
         GestoreColorificio.database_basi = list(GestoreColorificio.collection_basi.find())
         GestoreColorificio.database_vernici = list(GestoreColorificio.collection_vernici.find())
 
     @staticmethod
     def get_prossimo_id_base():
         if len(GestoreColorificio.database_basi) != 0:
-            GestoreColorificio.aggiorna_database_colorificio()
+            GestoreColorificio.aggiorna_database_gestore_colorificio()
             return GestoreColorificio.database_basi[-1]['_id'] + 1
+        else:
+            return 1
+
+    @staticmethod
+    def get_prossimo_id_vernice():
+        if len(GestoreColorificio.database_vernici) != 0:
+            GestoreColorificio.aggiorna_database_gestore_colorificio()
+            return GestoreColorificio.database_vernici[-1]['_id'] + 1
         else:
             return 1
 
@@ -43,28 +47,40 @@ class GestoreColorificio:
             'fornitore': {'marchionimo': base.get_fornitore().get_marchionimo(),
                           'partitaIVA': base.get_fornitore().get_partitaIVA()},
         })
-        GestoreColorificio.aggiorna_database_colorificio()
+        GestoreColorificio.aggiorna_database_gestore_colorificio()
+
+    @staticmethod
+    def aggiungi_vernice(vernice):
+        GestoreColorificio.collection_vernici.insert_one({
+            '_id': vernice.get_id(),
+            'descrizione': vernice.get_descrizione(),
+            'id_base': vernice.get_id_base(),
+            'quantita_rosso': vernice.get_quantita_rosso(),
+            'quantita_blu': vernice.get_quantita_blu(),
+            'quantita_giallo': vernice.get_quantita_giallo(),
+            'prezzo': vernice.get_prezzo()
+        })
+        GestoreColorificio.diminuisci_giacenza_base(vernice.get_id_base(), 1)
+        GestoreColorificio.diminuisci_giacenza_colorante('rosso', vernice.get_quantita_rosso())
+        GestoreColorificio.diminuisci_giacenza_colorante('blu', vernice.get_quantita_blu())
+        GestoreColorificio.diminuisci_giacenza_colorante('giallo', vernice.get_quantita_giallo())
+        GestoreColorificio.aggiorna_database_gestore_colorificio()
 
     @staticmethod
     def elimina_base(id: int):
         GestoreColorificio.collection_basi.delete_one({'_id': id})
-        GestoreColorificio.aggiorna_database_colorificio()
+        GestoreColorificio.aggiorna_database_gestore_colorificio()
 
-    # @staticmethod
-    # def aumenta_giacenza_base(id: int, quantita: int):
-    #     GestoreColorificio.aggiorna_database_colorificio()
-    #     prodotto = GestoreColorificio.database_basi[id]
-    #     prodotto.set_giacenza(prodotto.get_giacenza() + quantita)
-    #     GestoreColorificio.aggiungi_base(prodotto)
-    #     GestoreColorificio.aggiorna_database_colorificio()
-    #
-    # @staticmethod
-    # def diminuisci_giacenza_base(id: int, quantita: int):
-    #     GestoreColorificio.aggiorna_database_colorificio()
-    #     prodotto = GestoreColorificio.database_basi[id]
-    #     prodotto.set_giacenza(prodotto.get_giacenza() - quantita)
-    #     GestoreColorificio.aggiungi_base(prodotto)
-    #     GestoreColorificio.aggiorna_database_colorificio()
+    @staticmethod
+    def rimuovi_vernice(id: int):
+        GestoreColorificio.collection_vernici.delete_one({'_id': id})
+        GestoreColorificio.aggiorna_database_gestore_colorificio()
+
+    @staticmethod
+    def diminuisci_giacenza_base(id: int, quantita: int):
+        GestoreColorificio.collection_basi.update_one({'_id': id},
+                                                      {'$inc': {'giacenza': -1 * quantita}})
+        GestoreColorificio.aggiorna_database_gestore_colorificio()
 
     @staticmethod
     def modifica_base(id_vecchia_base: int, nuova_base: Base):
@@ -78,7 +94,7 @@ class GestoreColorificio:
                                                               'marchionimo': nuova_base.get_fornitore().get_marchionimo(),
                                                               'partitaIVA': nuova_base.get_fornitore().get_partitaIVA()},
                                                       }})
-        GestoreColorificio.aggiorna_database_colorificio()
+        GestoreColorificio.aggiorna_database_gestore_colorificio()
 
     @staticmethod
     def get_oggetto_da_dict(base_dict: dict):
@@ -119,3 +135,4 @@ class GestoreColorificio:
             GestoreColorificio.colorante_blu.set_giacenza_litri(GestoreColorificio.colorante_blu.get_giacenza_litri() - quantita)
         elif colore == 'giallo':
             GestoreColorificio.colorante_giallo.set_giacenza_litri(GestoreColorificio.colorante_giallo.get_giacenza_litri() - quantita)
+        GestoreColorificio.aggiorna_database_coloranti()

@@ -1,7 +1,6 @@
 from PyQt5.QtCore import QSize
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QFormLayout, QPushButton
 
-from Prodotto import Prodotto
 from viste.visteGestioneMagazzino.VistaEliminaProdotto import VistaEliminaProdotto
 from viste.visteGestioneMagazzino.VistaModificaProdotto import VistaModificaProdotto
 from viste.visteGestioneMagazzino.VistaQRCode import VistaQRCode
