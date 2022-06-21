@@ -42,9 +42,9 @@ class VistaInformazioniProdotto(QWidget):
         self.button_creaQR = QPushButton('Crea QR code ubicazione...')
         self.button_creaQR.clicked.connect(lambda: self.open_QR(prodotto['_id']))
         self.button_modifica_prodotto = QPushButton('Modifica prodotto...')
-        self.button_modifica_prodotto.clicked.connect(self.open_modifica_prodotto)
+        self.button_modifica_prodotto.clicked.connect(lambda: self.open_modifica_prodotto(prodotto['_id']))
         self.button_elimina_prodotto = QPushButton('Elimina prodotto...')
-        self.button_elimina_prodotto.clicked.connect(self.open_elimina_prodotto)
+        self.button_elimina_prodotto.clicked.connect(lambda: self.open_elimina_prodotto(prodotto['_id']))
         self.v_layout.addLayout(self.f_layout)
         self.v_layout.addWidget(self.button_creaQR)
         self.v_layout.addWidget(self.button_modifica_prodotto)
@@ -58,10 +58,11 @@ class VistaInformazioniProdotto(QWidget):
         self.vista_qr = VistaQRCode(id=id)
         self.vista_qr.show()
 
-    def open_modifica_prodotto(self):
-        self.vista_modifica_prodotto = VistaModificaProdotto()
+    def open_modifica_prodotto(self, id: int):
+        self.vista_modifica_prodotto = VistaModificaProdotto(id=id)
         self.vista_modifica_prodotto.show()
 
-    def open_elimina_prodotto(self):
-        self.vista_elimina_prodotto = VistaEliminaProdotto()
+    def open_elimina_prodotto(self, id: int):
+        self.vista_elimina_prodotto = VistaEliminaProdotto(id=id)
         self.vista_elimina_prodotto.show()
+        self.close()

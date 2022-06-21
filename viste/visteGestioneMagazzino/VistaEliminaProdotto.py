@@ -1,16 +1,17 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QHBoxLayout, QPushButton
 
+from gestione.GestoreMagazzino import GestoreMagazzino
+
 
 class VistaEliminaProdotto(QWidget):
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, id=1):
         super(VistaEliminaProdotto, self).__init__(parent)
-        print('OK')
         self.v_layout = QVBoxLayout()
         self.label = QLabel('Sei sicuro di voler eliminare il prodotto?')
         self.h_layout = QHBoxLayout()
         self.button_si = QPushButton('Sì')
-        self.button_si.clicked.connect(self.elimina_prodotto)
+        self.button_si.clicked.connect(lambda: self.elimina_prodotto(id))
         self.button_no = QPushButton('No')
         self.button_no.clicked.connect(self.close)
         self.h_layout.addWidget(self.button_si)
@@ -21,5 +22,6 @@ class VistaEliminaProdotto(QWidget):
         self.setWindowTitle("Elimina prodotto")
         self.setFixedSize(250, 70)
 
-    def elimina_prodotto(self):
-        pass
+    def elimina_prodotto(self, id: int):
+        GestoreMagazzino.elimina_prodotto(id)
+        self.close()

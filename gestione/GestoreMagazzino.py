@@ -1,6 +1,3 @@
-import os
-import pickle as pk
-
 from Dimensione import Dimensione
 from Fornitore import Fornitore
 from Prodotto import Prodotto
@@ -8,7 +5,6 @@ from Ubicazione import Ubicazione
 
 
 class GestoreMagazzino:
-
     collection_prodotti = None
     database_prodotti = []
 
@@ -47,10 +43,8 @@ class GestoreMagazzino:
 
     @staticmethod
     def elimina_prodotto(id: int):
+        GestoreMagazzino.collection_prodotti.delete_one({'_id': id})
         GestoreMagazzino.aggiorna_database_prodotti()
-        del GestoreMagazzino.database_prodotti[id]
-        with open('dati/prodotti.pickle', 'wb') as f:
-            pk.dump(GestoreMagazzino.database_prodotti, f, pk.HIGHEST_PROTOCOL)
 
     @staticmethod
     def aumenta_giacenza_prodotto(id: int, quantita: int):
@@ -81,11 +75,51 @@ class GestoreMagazzino:
 
     @staticmethod
     def modifica_prodotto(id_vecchio_prodotto: int, nuovo_prodotto: Prodotto):
-        pass
+        GestoreMagazzino.collection_prodotti.update_one({'_id': id_vecchio_prodotto},
+                                                        {'$set': {'nome': nuovo_prodotto.get_nome(),
+                                                                  'giacenza': nuovo_prodotto.get_giacenza(),
+                                                                  'prezzo': nuovo_prodotto.get_prezzo(),
+                                                                  'data_immagazzinamento': nuovo_prodotto.get_data_immagazzinamento(),
+                                                                  'ubicazione': {
+                                                                      'numero_scaffale': nuovo_prodotto.get_ubicazione().get_numero_scaffale(),
+                                                                      'livello': nuovo_prodotto.get_ubicazione().get_livello(),
+                                                                      'posizione': nuovo_prodotto.get_ubicazione().get_posizione()},
+                                                                  'dimensione': {
+                                                                      'lunghezza': nuovo_prodotto.get_dimensione().get_lunghezza(),
+                                                                      'larghezza': nuovo_prodotto.get_dimensione().get_larghezza(),
+                                                                      'profondita': nuovo_prodotto.get_dimensione().get_profondita(),
+                                                                      'peso': nuovo_prodotto.get_dimensione().get_peso()},
+                                                                  'fornitore': {
+                                                                      'marchionimo': nuovo_prodotto.get_fornitore().get_marchionimo(),
+                                                                      'partitaIVA': nuovo_prodotto.get_fornitore().get_partitaIVA()},
+                                                                  'note': nuovo_prodotto.get_note()}})
+        GestoreMagazzino.aggiorna_database_prodotti()
 
     @staticmethod
     def get_oggetto_da_dict(prodotto_dict: dict):
-        ubicazione = Ubicazione(prodotto_dict['ubicazione']['numero_scaffale'], prodotto_dict['ubicazione']['livello'], prodotto_dict['ubicazione']['posizione'])
-        dimensione = Dimensione(prodotto_dict['dimensione']['lunghezza'], prodotto_dict['dimensione']['larghezza'], prodotto_dict['dimensione']['profondita'], prodotto_dict['dimensione']['peso'])
+        ubicazione = Ubicazione(prodotto_dict['ubicazione']['numero_scaffale'], prodotto_dict['ubicazione']['livello'],
+                                prodotto_dict['ubicazione']['posizione'])
+        dimensione = Dimensione(prodotto_dict['dimensione']['lunghezza'], prodotto_dict['dimensione']['larghezza'],
+                                prodotto_dict['dimensione']['profondita'], prodotto_dict['dimensione']['peso'])
         fornitore = Fornitore('Gianni srl', 154891205)
-        return Prodotto(prodotto_dict['_id'], prodotto_dict['nome'], prodotto_dict['giacenza'], prodotto_dict['prezzo'], ubicazione, dimensione, fornitore, prodotto_dict['note'])
+        return Prodotto(prodotto_dict['_id'], prodotto_dict['nome'], prodotto_dict['giacenza'], prodotto_dict['prezzo'],
+                        ubicazione, dimensione, fornitore, prodotto_dict['note'])
+
+    @staticmethod
+    def ricerca_ordina_prodotti(tipo, parametro, tipo_ordinamento, decrescente):
+        if tipo == 'fornitore':
+            risultato_ricerca = sorted(list(
+                GestoreMagazzino.collection_prodotti.find(
+                    {f'{tipo}.marchionimo': {'$regex': f".*{parametro}.*", '$options': 'i'}})),
+                key=lambda prodotto: prodotto[tipo_ordinamento], reverse=decrescente)
+            return risultato_ricerca
+        elif tipo == '_id':
+            risultato_ricerca = sorted(list(
+                GestoreMagazzino.collection_prodotti.find({'_id': int(parametro)})),
+                key=lambda prodotto: prodotto[tipo_ordinamento], reverse=decrescente)
+            return risultato_ricerca
+        elif tipo == 'nome':
+            risultato_ricerca = sorted(list(
+                GestoreMagazzino.collection_prodotti.find({tipo: {'$regex': f".*{parametro}.*", '$options': 'i'}})),
+                                       key=lambda prodotto: prodotto[tipo_ordinamento], reverse=decrescente)
+            return risultato_ricerca
