@@ -6,6 +6,7 @@ from pymongo import MongoClient
 from gestione.GestoreClienti import GestoreClienti
 from gestione.GestoreColorificio import GestoreColorificio
 from gestione.GestoreDocumenti import GestoreDocumenti
+from gestione.GestoreImpiegati import GestoreImpiegati
 from gestione.GestoreMagazzino import GestoreMagazzino
 from viste.VistaLogin import VistaLogin
 
@@ -22,9 +23,11 @@ if __name__ == '__main__':
     GestoreColorificio.collection_vernici = db['vernici']
     GestoreClienti.collection_clienti = db['clienti']
     GestoreDocumenti.collection_documenti = db['documenti']
+    GestoreImpiegati.collection_impiegati = db['impiegati']
     GestoreMagazzino.aggiorna_database_gestore_prodotti()
     GestoreColorificio.aggiorna_database_gestore_colorificio()
     GestoreColorificio.aggiorna_giacenza_coloranti()
+    GestoreImpiegati.aggiorna_database_gestore_impiegati()
     vista_login.show()
     sys.exit(app.exec())
 
