@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QLab
 from viste.visteGestioneClienti.VistaGestioneClienti import VistaGestioneClienti
 from viste.visteGestioneColorificio.VistaGestioneColorificio import VistaGestioneColorificio
 from viste.visteGestioneDocumentazione.VistaGestioneDocumentazione import VistaGestioneDocumentazione
+from viste.visteGestioneFornitori.VistaListaFornitori import VistaListaFornitori
 from viste.visteGestioneImpiegati.VistaGestioneImpiegati import VistaGestioneImpiegati
 from viste.visteGestioneMagazzino.VistaGestioneMagazzino import VistaGestioneMagazzino
 
@@ -64,4 +65,5 @@ class VistaHome(QWidget):
         self.vista_gestione_impiegati.show()
 
     def open_fornitori(self):
-        pass
+        self.vista_lista_fornitori = VistaListaFornitori()
+        self.vista_lista_fornitori.show()
