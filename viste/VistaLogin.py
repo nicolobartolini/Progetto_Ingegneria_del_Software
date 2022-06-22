@@ -1,7 +1,9 @@
 from PyQt5.QtCore import QSize
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QFormLayout, QLineEdit, QPushButton
 
+from gestione.GestoreImpiegati import GestoreImpiegati
 from viste.VistaHome import VistaHome
+from viste.VistaMessaggioGenerico import VistaMessaggioGenerico
 
 
 class VistaLogin(QWidget):
@@ -26,6 +28,17 @@ class VistaLogin(QWidget):
         self.setFixedSize(QSize(300, 120))
 
     def check_login(self):
-        self.vista_home = VistaHome()
-        self.vista_home.show()
-        self.close()
+        nome_utente = self.text_input_username.text()
+        password = self.text_input_password.text()
+        impiegato = GestoreImpiegati.collection_impiegati.find_one({'_id': nome_utente})
+        if impiegato is None:
+            self.messaggio_username_non_trovato = VistaMessaggioGenerico(msg='Nome utente non trovato.')
+            self.messaggio_username_non_trovato.show()
+        else:
+            if password == impiegato['password']:
+                self.vista_home = VistaHome(nome_utente=impiegato['_id'], ruolo=impiegato['ruolo'])
+                self.vista_home.show()
+                self.close()
+            else:
+                self.messaggio_password_errata = VistaMessaggioGenerico(msg='Password errata.')
+                self.messaggio_password_errata.show()

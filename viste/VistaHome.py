@@ -1,6 +1,8 @@
 from PyQt5.QtCore import QSize
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QLabel
 
+
+from viste.VistaMessaggioGenerico import VistaMessaggioGenerico
 from viste.visteGestioneClienti.VistaGestioneClienti import VistaGestioneClienti
 from viste.visteGestioneColorificio.VistaGestioneColorificio import VistaGestioneColorificio
 from viste.visteGestioneDocumentazione.VistaGestioneDocumentazione import VistaGestioneDocumentazione
@@ -11,11 +13,13 @@ from viste.visteGestioneMagazzino.VistaGestioneMagazzino import VistaGestioneMag
 
 class VistaHome(QWidget):
 
-    def __init__(self, parent=None):
+    def __init__(self, nome_utente, ruolo, parent=None):
         super(VistaHome, self).__init__(parent)
+        self.ruolo = ruolo
         grid_layout = QGridLayout()
-        self.label_username = QLabel('Username:')
+        self.label_username = QLabel(f'Username: {nome_utente}')
         self.button_logout = QPushButton('Log out')
+        self.button_logout.clicked.connect(self.log_out)
         grid_layout.addWidget(self.label_username, 0, 0, 1, 1)
         grid_layout.addWidget(self.button_logout, 0, 3, 1, 1)
         grid_layout.addWidget(self.get_generic_button('Gestione magazzino', self.open_magazzino), 1, 0, 1, 2)
@@ -44,26 +48,57 @@ class VistaHome(QWidget):
         button.setStyleSheet('font-size: 25px;')
         return button
 
+    def log_out(self):
+        from viste.VistaLogin import VistaLogin
+        self.vista_login = VistaLogin()
+        self.vista_login.show()
+        self.close()
+
     def open_magazzino(self):
-        self.vista_gestione_magazzino = VistaGestioneMagazzino()
-        self.vista_gestione_magazzino.show()
+        if self.ruolo != 'Banconista':
+            self.vista_gestione_magazzino = VistaGestioneMagazzino()
+            self.vista_gestione_magazzino.show()
+        else:
+            self.messaggio_no_permessi = VistaMessaggioGenerico(msg='Non hai il ruolo adatto per accedere a questa sezione.')
+            self.messaggio_no_permessi.show()
 
     def open_colorificio(self):
-        self.vista_gestione_colorificio = VistaGestioneColorificio()
-        self.vista_gestione_colorificio.show()
+        if self.ruolo != 'Magazziniere':
+            self.vista_gestione_colorificio = VistaGestioneColorificio()
+            self.vista_gestione_colorificio.show()
+        else:
+            self.messaggio_no_permessi = VistaMessaggioGenerico(msg='Non hai il ruolo adatto per accedere a questa sezione.')
+            self.messaggio_no_permessi.show()
 
     def open_clienti(self):
-        self.vista_gestione_clienti = VistaGestioneClienti()
-        self.vista_gestione_clienti.show()
+        if self.ruolo != 'Magazziniere':
+            self.vista_gestione_clienti = VistaGestioneClienti()
+            self.vista_gestione_clienti.show()
+        else:
+            self.messaggio_no_permessi = VistaMessaggioGenerico(msg='Non hai il ruolo adatto per accedere a questa sezione.')
+            self.messaggio_no_permessi.show()
 
     def open_documentazione(self):
-        self.vista_gestione_documentazione = VistaGestioneDocumentazione()
-        self.vista_gestione_documentazione.show()
+        if self.ruolo != 'Magazziniere':
+            self.vista_gestione_documentazione = VistaGestioneDocumentazione()
+            self.vista_gestione_documentazione.show()
+        else:
+            self.messaggio_no_permessi = VistaMessaggioGenerico(msg='Non hai il ruolo adatto per accedere a questa sezione.')
+            self.messaggio_no_permessi.show()
 
     def open_impiegati(self):
-        self.vista_gestione_impiegati = VistaGestioneImpiegati()
-        self.vista_gestione_impiegati.show()
+        if self.ruolo == 'Amministratore':
+            self.vista_gestione_impiegati = VistaGestioneImpiegati()
+            self.vista_gestione_impiegati.show()
+        else:
+            self.messaggio_no_permessi = VistaMessaggioGenerico(msg='Non hai il ruolo adatto per accedere a questa sezione.')
+            self.messaggio_no_permessi.show()
 
     def open_fornitori(self):
-        self.vista_lista_fornitori = VistaListaFornitori()
-        self.vista_lista_fornitori.show()
+        if self.ruolo == 'Amministratore':
+            self.vista_lista_fornitori = VistaListaFornitori()
+            self.vista_lista_fornitori.show()
+        else:
+            self.messaggio_no_permessi = VistaMessaggioGenerico(msg='Non hai il ruolo adatto per accedere a questa sezione.')
+            self.messaggio_no_permessi.show()
+
