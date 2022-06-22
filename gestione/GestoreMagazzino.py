@@ -9,13 +9,13 @@ class GestoreMagazzino:
     database_prodotti = []
 
     @staticmethod
-    def aggiorna_database_prodotti():
+    def aggiorna_database_gestore_prodotti():
         GestoreMagazzino.database_prodotti = list(GestoreMagazzino.collection_prodotti.find())
 
     @staticmethod
     def get_prossimo_id_prodotto():
         if len(GestoreMagazzino.database_prodotti) != 0:
-            GestoreMagazzino.aggiorna_database_prodotti()
+            GestoreMagazzino.aggiorna_database_gestore_prodotti()
             return GestoreMagazzino.database_prodotti[-1]['_id'] + 1
         else:
             return 1
@@ -39,32 +39,32 @@ class GestoreMagazzino:
                           'partitaIVA': prodotto.get_fornitore().get_partitaIVA()},
             'note': prodotto.get_note()
         })
-        GestoreMagazzino.aggiorna_database_prodotti()
+        GestoreMagazzino.aggiorna_database_gestore_prodotti()
 
     @staticmethod
     def elimina_prodotto(id: int):
         GestoreMagazzino.collection_prodotti.delete_one({'_id': id})
-        GestoreMagazzino.aggiorna_database_prodotti()
+        GestoreMagazzino.aggiorna_database_gestore_prodotti()
 
     @staticmethod
     def aumenta_giacenza_prodotto(id: int, quantita: int):
-        GestoreMagazzino.aggiorna_database_prodotti()
+        GestoreMagazzino.aggiorna_database_gestore_prodotti()
         prodotto = GestoreMagazzino.database_prodotti[id]
         prodotto.set_giacenza(prodotto.get_giacenza() + quantita)
         GestoreMagazzino.aggiungi_prodotto(prodotto)
-        GestoreMagazzino.aggiorna_database_prodotti()
+        GestoreMagazzino.aggiorna_database_gestore_prodotti()
 
     @staticmethod
     def diminuisci_giacenza_prodotto(id: int, quantita: int):
-        GestoreMagazzino.aggiorna_database_prodotti()
+        GestoreMagazzino.aggiorna_database_gestore_prodotti()
         prodotto = GestoreMagazzino.database_prodotti[id]
         prodotto.set_giacenza(prodotto.get_giacenza() - quantita)
         GestoreMagazzino.aggiungi_prodotto(prodotto)
-        GestoreMagazzino.aggiorna_database_prodotti()
+        GestoreMagazzino.aggiorna_database_gestore_prodotti()
 
     @staticmethod
     def get_QR_prodotto(id: int):
-        GestoreMagazzino.aggiorna_database_prodotti()
+        GestoreMagazzino.aggiorna_database_gestore_prodotti()
         prodotto_dict = {}
         for prodotto in GestoreMagazzino.database_prodotti:
             if prodotto['_id'] == id:
@@ -93,7 +93,7 @@ class GestoreMagazzino:
                                                                       'marchionimo': nuovo_prodotto.get_fornitore().get_marchionimo(),
                                                                       'partitaIVA': nuovo_prodotto.get_fornitore().get_partitaIVA()},
                                                                   'note': nuovo_prodotto.get_note()}})
-        GestoreMagazzino.aggiorna_database_prodotti()
+        GestoreMagazzino.aggiorna_database_gestore_prodotti()
 
     @staticmethod
     def get_oggetto_da_dict(prodotto_dict: dict):

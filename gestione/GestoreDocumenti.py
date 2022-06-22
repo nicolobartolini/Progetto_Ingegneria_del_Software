@@ -4,9 +4,9 @@ import pickle as pk
 from Vernice import Vernice
 
 
-class GestoreVernici:
+class GestoreDocumenti:
 
-    storico_vernici = {}
+    collection_documenti = None
 
     @staticmethod
     def aggiorna_storico():

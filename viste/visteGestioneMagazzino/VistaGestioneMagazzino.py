@@ -39,9 +39,9 @@ class VistaGestioneMagazzino(QWidget):
         self.button_cambia_ordinamento.clicked.connect(self.ordina_lista_prodotti)
         self.h_layout_2.addWidget(self.label_scelta_ordinamento)
         self.h_layout_2.addWidget(self.scelta_ordinamento_cbox)
-        self.h_layout_2.addWidget(self.button_cambia_ordinamento)  # DA RIVEDERE DISPOSIZIONE
+        self.h_layout_2.addWidget(self.button_cambia_ordinamento)
         self.lista_prodotti = QListWidget()
-        GestoreMagazzino.aggiorna_database_prodotti()
+        GestoreMagazzino.aggiorna_database_gestore_prodotti()
         self.set_lista_prodotti(GestoreMagazzino.database_prodotti)
         self.lista_prodotti.itemActivated.connect(self.open_informazioni_prodotto)
         self.button_inserisci_prodotto = QPushButton('Inserisci prodotto...')

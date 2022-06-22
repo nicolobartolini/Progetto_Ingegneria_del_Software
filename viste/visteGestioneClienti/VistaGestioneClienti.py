@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton, QHBoxLayout, \
     QListWidget, QComboBox
 
+from gestione.GestoreClienti import GestoreClienti
 from viste.visteGestioneClienti.VistaInformazioniCliente import VistaInformazioniCliente
 from viste.visteGestioneClienti.VistaInserisciClienteAzienda import VistaInserisciClienteAzienda
 from viste.visteGestioneClienti.VistaInserisciClientePersona import VistaInserisciClientePersona
@@ -15,15 +16,17 @@ class VistaGestioneClienti(QWidget):
         self.label = QLabel('Ricerca:')
         self.barra_ricerca = QLineEdit()
         self.cbox_tipo_ricerca = QComboBox()
-        self.cbox_tipo_ricerca.addItem('Ricerca per nome')
-        self.cbox_tipo_ricerca.addItem('Ricerca per codice fiscale')
-        self.button_cerca = QPushButton('Cerca')
+        self.cbox_tipo_ricerca.addItem('Ricerca per cognome/marchionimo')
+        self.cbox_tipo_ricerca.addItem('Ricerca per codice fiscale/partitaIVA')
+        self.button_cerca = QPushButton('Cerca/Aggiorna')
+        self.button_cerca.clicked.connect(self.ricerca_lista_clienti)
         self.h_layout.addWidget(self.label)
         self.h_layout.addWidget(self.barra_ricerca)
+        self.h_layout.addWidget(self.cbox_tipo_ricerca)
         self.h_layout.addWidget(self.button_cerca)
         self.lista_clienti = QListWidget()
-        self.lista_clienti.addItem('prova')
-        self.lista_clienti.addItem('prova2')
+        GestoreClienti.aggiorna_database_gestore_clienti()
+        self.set_lista_clienti(GestoreClienti.database_clienti)
         self.lista_clienti.itemActivated.connect(self.open_informazioni_cliente)
         self.button_inserisci_cliente_persona = QPushButton('Inserisci cliente (persona)...')
         self.button_inserisci_cliente_persona.clicked.connect(self.open_inserisci_cliente_persona)
@@ -49,5 +52,30 @@ class VistaGestioneClienti(QWidget):
         self.vista_inserisci_cliente_azienda.show()
 
     def open_informazioni_cliente(self, item):
-        self.vista_informazioni_cliente = VistaInformazioniCliente()
+        cliente_dict = {}
+        id_cliente = int(item.text().split(' ')[0])
+        for cliente in GestoreClienti.database_clienti:
+            if cliente['_id'] == id_cliente:
+                cliente_dict = cliente
+                break
+        self.vista_informazioni_cliente = VistaInformazioniCliente(cliente=cliente_dict)
         self.vista_informazioni_cliente.show()
+
+    def set_lista_clienti(self, lista_clienti):
+        self.lista_clienti.clear()
+        if len(lista_clienti) != 0:
+            for cliente in lista_clienti:
+                if cliente['tipo'] == 'persona':
+                    self.lista_clienti.addItem(f'{cliente["_id"]} | {cliente["nome"].capitalize()} {cliente["cognome"].capitalize()}')
+                elif cliente['tipo'] == 'azienda':
+                    self.lista_clienti.addItem(
+                        f'{cliente["_id"]} | {cliente["marchionimo"]}')
+
+    def ricerca_lista_clienti(self):
+        parametro = self.barra_ricerca.text()
+        lista_clienti = []
+        if self.cbox_tipo_ricerca.currentText() == 'Ricerca per cognome/marchionimo':
+            lista_clienti = GestoreClienti.ricerca_ordina_clienti('cognome', parametro)
+        elif self.cbox_tipo_ricerca.currentText() == 'Ricerca per codice fiscale/partitaIVA':
+            lista_clienti = GestoreClienti.ricerca_ordina_clienti('cf', parametro)
+        self.set_lista_clienti(lista_clienti)

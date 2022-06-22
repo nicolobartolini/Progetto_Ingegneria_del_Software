@@ -3,7 +3,9 @@ import sys
 from PyQt5.QtWidgets import QApplication
 from pymongo import MongoClient
 
+from gestione.GestoreClienti import GestoreClienti
 from gestione.GestoreColorificio import GestoreColorificio
+from gestione.GestoreDocumenti import GestoreDocumenti
 from gestione.GestoreMagazzino import GestoreMagazzino
 from viste.VistaLogin import VistaLogin
 
@@ -18,7 +20,9 @@ if __name__ == '__main__':
     GestoreColorificio.collection_coloranti = db['coloranti']
     GestoreColorificio.collection_basi = db['basi']
     GestoreColorificio.collection_vernici = db['vernici']
-    GestoreMagazzino.aggiorna_database_prodotti()
+    GestoreClienti.collection_clienti = db['clienti']
+    GestoreDocumenti.collection_documenti = db['documenti']
+    GestoreMagazzino.aggiorna_database_gestore_prodotti()
     GestoreColorificio.aggiorna_database_gestore_colorificio()
     GestoreColorificio.aggiorna_giacenza_coloranti()
     vista_login.show()

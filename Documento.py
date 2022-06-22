@@ -1,4 +1,8 @@
+import datetime
+
 import Prodotto
+from Cliente import Cliente
+from Vernice import Vernice
 
 
 class Documento:

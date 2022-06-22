@@ -1,10 +1,11 @@
 from Cliente import Cliente
+from Documento import Documento
 
 
 class ClientePersona(Cliente):
 
-    def __init__(self, id: int, indirizzo_email: str, telefono: str, documenti: list[Documento], codice_fiscale: str, cognome: str, nome: str):
-        super().__init__(id, indirizzo_email, telefono, documenti)
+    def __init__(self, id: int, indirizzo_email: str, telefono: str, id_documenti: list[int], codice_fiscale: str, cognome: str, nome: str):
+        super().__init__(id, indirizzo_email, telefono, id_documenti)
         self.codice_fiscale = codice_fiscale
         self.cognome = cognome
         self.nome = nome

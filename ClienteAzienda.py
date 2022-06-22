@@ -3,8 +3,8 @@ from Cliente import Cliente
 
 class ClienteAzienda(Cliente):
 
-    def __init__(self, id: int, indirizzo_email: str, telefono: str, documenti: list[Documento], marchionimo: str, partitaIVA: int):
-        super().__init__(id, indirizzo_email, telefono, documenti)
+    def __init__(self, id: int, indirizzo_email: str, telefono: str, id_documenti: list[int], marchionimo: str, partitaIVA: int):
+        super().__init__(id, indirizzo_email, telefono, id_documenti)
         self.marchionimo = marchionimo
         self.partitaIVA = partitaIVA
 
