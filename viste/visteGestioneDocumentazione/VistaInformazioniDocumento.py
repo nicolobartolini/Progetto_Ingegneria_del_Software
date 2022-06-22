@@ -3,11 +3,8 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QFormLayout, QPushButt
 
 from gestione.GestoreClienti import GestoreClienti
 from gestione.GestoreColorificio import GestoreColorificio
-from gestione.GestoreDocumenti import GestoreDocumenti
 from gestione.GestoreMagazzino import GestoreMagazzino
 from viste.VistaMessaggioGenerico import VistaMessaggioGenerico
-from viste.visteGestioneClienti.VistaEliminaCliente import VistaEliminaCliente
-from viste.visteGestioneClienti.VistaModificaCliente import VistaModificaCliente
 
 
 class VistaInformazioniDocumento(QWidget):
@@ -43,7 +40,8 @@ class VistaInformazioniDocumento(QWidget):
         self.setMaximumHeight(500)
 
     def crea_PDF(self, id: int):
-        self.vista_messaggio_non_siamo_riusciti_a_fare_pdf = VistaMessaggioGenerico(msg=f'Impossibile creare PDF per il documento {id}')
+        self.vista_messaggio_non_siamo_riusciti_a_fare_pdf = VistaMessaggioGenerico(
+            msg=f'Impossibile creare PDF per il documento {id}')
         self.vista_messaggio_non_siamo_riusciti_a_fare_pdf.show()
         self.close()
 

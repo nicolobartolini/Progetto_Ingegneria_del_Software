@@ -40,7 +40,8 @@ class VistaInserisciClientePersona(QWidget):
         email = self.input_email.text()
         telefono = self.input_telefono.text()
         id_documenti = []
-        nuovo_cliente = ClientePersona(GestoreClienti.get_prossimo_id_cliente(), email, telefono, id_documenti, codice_fiscale, cognome, nome)
+        nuovo_cliente = ClientePersona(GestoreClienti.get_prossimo_id_cliente(), email, telefono, id_documenti,
+                                       codice_fiscale, cognome, nome)
         GestoreClienti.aggiungi_cliente_persona(nuovo_cliente)
         self.messaggio_conferma = VistaMessaggioGenerico(msg='Cliente inserito con successo')
         self.messaggio_conferma.show()

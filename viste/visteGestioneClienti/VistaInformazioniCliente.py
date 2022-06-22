@@ -34,7 +34,8 @@ class VistaInformazioniCliente(QWidget):
         self.lista_documenti = QListWidget()
         self.set_lista_documenti(cliente)
         self.button_modifica_cliente = QPushButton('Modifica cliente...')
-        self.button_modifica_cliente.clicked.connect(lambda: self.open_modifica_cliente(id=cliente['_id'], tipo=cliente['tipo']))
+        self.button_modifica_cliente.clicked.connect(
+            lambda: self.open_modifica_cliente(id=cliente['_id'], tipo=cliente['tipo']))
         self.button_elimina_cliente = QPushButton('Elimina cliente...')
         self.button_elimina_cliente.clicked.connect(lambda: self.open_elimina_cliente(id=cliente['_id']))
         self.v_layout.addLayout(self.f_layout)
@@ -60,6 +61,7 @@ class VistaInformazioniCliente(QWidget):
         if len(cliente['documenti']) != 0:
             for id_documento in cliente['documenti']:
                 documento = GestoreDocumenti.collection_documenti.find_one({'_id': int(id_documento)})
-                self.lista_documenti.addItem(f'{str(id_documento)} | {str(documento["nome"])} | Pagamento: {str(documento["pagamento"])}')
+                self.lista_documenti.addItem(
+                    f'{str(id_documento)} | {str(documento["nome"])} | Pagamento: {str(documento["pagamento"])}')
         else:
             self.lista_documenti.addItem('Nessun documento intestato al cliente')

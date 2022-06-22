@@ -15,4 +15,3 @@ class Colorante:
 
     def set_giacenza_litri(self, giacenza_litri: float):
         self.giacenza_litri = giacenza_litri
-

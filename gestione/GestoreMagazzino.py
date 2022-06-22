@@ -120,5 +120,5 @@ class GestoreMagazzino:
         elif tipo == 'nome':
             risultato_ricerca = sorted(list(
                 GestoreMagazzino.collection_prodotti.find({tipo: {'$regex': f".*{parametro}.*", '$options': 'i'}})),
-                                       key=lambda prodotto: prodotto[tipo_ordinamento], reverse=decrescente)
+                key=lambda prodotto: prodotto[tipo_ordinamento], reverse=decrescente)
             return risultato_ricerca

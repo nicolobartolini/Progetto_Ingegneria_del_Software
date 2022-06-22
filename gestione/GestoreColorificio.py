@@ -130,9 +130,12 @@ class GestoreColorificio:
     @staticmethod
     def diminuisci_giacenza_colorante(colore, quantita):
         if colore == 'rosso':
-            GestoreColorificio.colorante_rosso.set_giacenza_litri(GestoreColorificio.colorante_rosso.get_giacenza_litri() - quantita)
+            GestoreColorificio.colorante_rosso.set_giacenza_litri(
+                GestoreColorificio.colorante_rosso.get_giacenza_litri() - quantita)
         elif colore == 'blu':
-            GestoreColorificio.colorante_blu.set_giacenza_litri(GestoreColorificio.colorante_blu.get_giacenza_litri() - quantita)
+            GestoreColorificio.colorante_blu.set_giacenza_litri(
+                GestoreColorificio.colorante_blu.get_giacenza_litri() - quantita)
         elif colore == 'giallo':
-            GestoreColorificio.colorante_giallo.set_giacenza_litri(GestoreColorificio.colorante_giallo.get_giacenza_litri() - quantita)
+            GestoreColorificio.colorante_giallo.set_giacenza_litri(
+                GestoreColorificio.colorante_giallo.get_giacenza_litri() - quantita)
         GestoreColorificio.aggiorna_database_coloranti()

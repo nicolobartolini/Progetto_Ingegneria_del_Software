@@ -78,7 +78,8 @@ class VistaInserisciProdotto(QWidget):
         dimensione = Dimensione(lunghezza, larghezza, profondita, peso)
         fornitore = Fornitore('Gianni srl', 131414132)
         note = self.input_note.toPlainText()
-        nuovo_prodotto = Prodotto(GestoreMagazzino.get_prossimo_id_prodotto(), nome, giacenza, prezzo, ubicazione, dimensione, fornitore, note)
+        nuovo_prodotto = Prodotto(GestoreMagazzino.get_prossimo_id_prodotto(), nome, giacenza, prezzo, ubicazione,
+                                  dimensione, fornitore, note)
         GestoreMagazzino.aggiungi_prodotto(nuovo_prodotto)
         self.messaggio_conferma = VistaMessaggioGenerico(msg='Prodotto inserito con successo!')
         self.messaggio_conferma.show()

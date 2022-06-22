@@ -1,9 +1,7 @@
 from PyQt5.QtCore import QSize
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QFormLayout, QLineEdit, QPushButton, QComboBox
 
-from ClienteAzienda import ClienteAzienda
 from Impiegato import Impiegato
-from gestione.GestoreClienti import GestoreClienti
 from gestione.GestoreImpiegati import GestoreImpiegati
 from viste.VistaMessaggioGenerico import VistaMessaggioGenerico
 

@@ -2,8 +2,9 @@ from gestione.GestoreColorificio import GestoreColorificio
 
 
 class Vernice:
-    
-    def __init__(self, id: int, descrizione: str, id_base: int, quantita_rosso: float, quantita_blu: float, quantita_giallo: float):
+
+    def __init__(self, id: int, descrizione: str, id_base: int, quantita_rosso: float, quantita_blu: float,
+                 quantita_giallo: float):
         self.id = id
         self.descrizione = descrizione
         self.id_base = id_base
@@ -38,4 +39,6 @@ class Vernice:
 
     def calcola_prezzo(self):
         base = GestoreColorificio.collection_basi.find_one({'_id': self.id_base})
-        return round(base['prezzo_al_litro'] * base['volume'] + (self.quantita_blu + self.quantita_giallo + self.quantita_rosso) * GestoreColorificio.prezzo_al_litro_coloranti, 2)
+        return round(base['prezzo_al_litro'] * base['volume'] + (
+                    self.quantita_blu + self.quantita_giallo + self.quantita_rosso) * GestoreColorificio.prezzo_al_litro_coloranti,
+                     2)

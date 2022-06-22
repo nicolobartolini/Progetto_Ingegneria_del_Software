@@ -40,4 +40,3 @@ class Base:
 
     def get_fornitore(self) -> Fornitore:
         return self.fornitore
-    

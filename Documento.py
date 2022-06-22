@@ -1,8 +1,5 @@
 import datetime
 
-import Prodotto
-from Cliente import Cliente
-from Vernice import Vernice
 from gestione.GestoreColorificio import GestoreColorificio
 from gestione.GestoreMagazzino import GestoreMagazzino
 

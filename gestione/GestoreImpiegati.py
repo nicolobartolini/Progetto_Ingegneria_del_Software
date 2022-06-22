@@ -1,14 +1,8 @@
-import os
-import pickle as pk
-
 from Documento import Documento
 from Impiegato import Impiegato
-from Vernice import Vernice
-from gestione.GestoreClienti import GestoreClienti
 
 
 class GestoreImpiegati:
-
     collection_impiegati = None
     database_impiegati = []
 
@@ -41,7 +35,8 @@ class GestoreImpiegati:
 
     @staticmethod
     def get_oggetto_da_dict(documento_dict: dict):
-        return Documento(documento_dict['_id'], documento_dict['tipo'], documento_dict['id_prodotti'], documento_dict['id_vernici'], documento_dict['id_cliente'])
+        return Documento(documento_dict['_id'], documento_dict['tipo'], documento_dict['id_prodotti'],
+                         documento_dict['id_vernici'], documento_dict['id_cliente'])
 
     @staticmethod
     def modifica_impiegato(nome_utente, nuovo_impiegato):

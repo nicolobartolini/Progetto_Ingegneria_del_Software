@@ -1,8 +1,6 @@
 from PyQt5.QtCore import QSize
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QFormLayout, QPushButton
 
-from gestione.GestoreColorificio import GestoreColorificio
-from viste.visteGestioneColorificio.VistaRimuoviVernice import VistaRimuoviVernice
 from viste.visteGestioneImpiegati.VistaModificaImpiegato import VistaModificaImpiegato
 from viste.visteGestioneImpiegati.VistaRimuoviImpiegato import VistaRimuoviImpiegato
 

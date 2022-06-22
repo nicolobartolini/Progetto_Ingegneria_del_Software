@@ -1,14 +1,7 @@
-import os
-import pickle as pk
-
-from Documento import Documento
 from Fornitore import Fornitore
-from Vernice import Vernice
-from gestione.GestoreClienti import GestoreClienti
 
 
 class GestoreFornitori:
-
     collection_fornitori = None
     database_fornitori = []
 

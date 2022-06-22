@@ -1,10 +1,7 @@
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QPushButton, QListWidget, QHBoxLayout
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QPushButton, QListWidget, QHBoxLayout
 
 from gestione.GestoreClienti import GestoreClienti
-from gestione.GestoreColorificio import GestoreColorificio
 from gestione.GestoreDocumenti import GestoreDocumenti
-from viste.visteGestioneColorificio.VistaInformazioniVernice import VistaInformazioniVernice
-from viste.visteGestioneColorificio.VistaInserisciVernice import VistaInserisciVernice
 from viste.visteGestioneDocumentazione.VistaCreaFattura import VistaCreaFattura
 from viste.visteGestioneDocumentazione.VistaCreaPreventivo import VistaCreaPreventivo
 from viste.visteGestioneDocumentazione.VistaInformazioniDocumento import VistaInformazioniDocumento
@@ -31,7 +28,6 @@ class VistaGestioneDocumentazione(QWidget):
         self.setLayout(self.v_layout)
         self.setWindowTitle("Gestione Documentazione")
         self.setMinimumSize(700, 900)
-
 
     def open_crea_fattura(self):
         self.vista_crea_fattura = VistaCreaFattura()

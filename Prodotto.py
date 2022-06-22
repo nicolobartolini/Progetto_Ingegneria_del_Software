@@ -9,7 +9,8 @@ from Ubicazione import Ubicazione
 
 class Prodotto():
 
-    def __init__(self, id: int, nome: str,  giacenza: int, prezzo: float, ubicazione: Ubicazione, dimensione: Dimensione, fornitore: Fornitore, note: str):
+    def __init__(self, id: int, nome: str, giacenza: int, prezzo: float, ubicazione: Ubicazione, dimensione: Dimensione,
+                 fornitore: Fornitore, note: str):
         self.id = id
         self.nome = nome
         self.data_immagazzinamento = datetime.datetime.now()

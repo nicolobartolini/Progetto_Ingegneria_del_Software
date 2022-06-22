@@ -42,7 +42,6 @@ class VistaGestioneClienti(QWidget):
         self.setWindowTitle("Gestione Clienti")
         self.setMinimumSize(700, 900)
 
-
     def open_inserisci_cliente_persona(self):
         self.vista_inserisci_cliente_persona = VistaInserisciClientePersona()
         self.vista_inserisci_cliente_persona.show()
@@ -66,7 +65,8 @@ class VistaGestioneClienti(QWidget):
         if len(lista_clienti) != 0:
             for cliente in lista_clienti:
                 if cliente['tipo'] == 'persona':
-                    self.lista_clienti.addItem(f'{cliente["_id"]} | {cliente["nome"].capitalize()} {cliente["cognome"].capitalize()}')
+                    self.lista_clienti.addItem(
+                        f'{cliente["_id"]} | {cliente["nome"].capitalize()} {cliente["cognome"].capitalize()}')
                 elif cliente['tipo'] == 'azienda':
                     self.lista_clienti.addItem(
                         f'{cliente["_id"]} | {cliente["marchionimo"]}')

@@ -35,4 +35,3 @@ if __name__ == '__main__':
     GestoreFornitori.aggiorna_database_gestore_fornitori()
     vista_login.show()
     sys.exit(app.exec())
-

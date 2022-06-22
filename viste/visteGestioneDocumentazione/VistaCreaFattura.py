@@ -1,5 +1,5 @@
 from PyQt5.QtCore import QSize
-from PyQt5.QtWidgets import QWidget, QPushButton, QVBoxLayout, QFormLayout, QComboBox, QListWidget, QLineEdit
+from PyQt5.QtWidgets import QWidget, QPushButton, QVBoxLayout, QFormLayout, QComboBox, QListWidget
 
 from Documento import Documento
 from Vernice import Vernice
@@ -54,7 +54,8 @@ class VistaCreaFattura(QWidget):
         self.prodotti.clear()
         for prodotto in GestoreMagazzino.database_prodotti:
             if prodotto['giacenza'] > 0:
-                self.prodotti.addItem(f'{prodotto["_id"]} | {prodotto["nome"]} | Giacenza: {prodotto["giacenza"]} | {prodotto["prezzo"]} €')
+                self.prodotti.addItem(
+                    f'{prodotto["_id"]} | {prodotto["nome"]} | Giacenza: {prodotto["giacenza"]} | {prodotto["prezzo"]} €')
 
     def set_cbox_vernici(self):
         GestoreColorificio.aggiorna_database_gestore_colorificio()
@@ -74,7 +75,9 @@ class VistaCreaFattura(QWidget):
         id_vernice_da_aggiungere = int(vernice_da_aggiungere.split(' ')[0])
         self.lista_vernici.addItem(vernice_da_aggiungere)
         nuova_vernice_dict = GestoreColorificio.collection_vernici.find_one({'_id': id_vernice_da_aggiungere})
-        nuova_vernice = Vernice(GestoreColorificio.get_prossimo_id_vernice(), nuova_vernice_dict['descrizione'], nuova_vernice_dict['id_base'], nuova_vernice_dict['quantita_rosso'], nuova_vernice_dict['quantita_blu'], nuova_vernice_dict['quantita_giallo'])
+        nuova_vernice = Vernice(GestoreColorificio.get_prossimo_id_vernice(), nuova_vernice_dict['descrizione'],
+                                nuova_vernice_dict['id_base'], nuova_vernice_dict['quantita_rosso'],
+                                nuova_vernice_dict['quantita_blu'], nuova_vernice_dict['quantita_giallo'])
         GestoreColorificio.aggiungi_vernice(nuova_vernice)
         self.set_cbox_vernici()
 
@@ -86,6 +89,7 @@ class VistaCreaFattura(QWidget):
         id_vernici = []
         for i in range(self.lista_vernici.count()):
             id_vernici.append(int(self.lista_vernici.item(i).text().split(' ')[0]))
-        documento = Documento(GestoreDocumenti.get_prossimo_id_documento(), 'fattura', id_prodotti, id_vernici, id_cliente)
+        documento = Documento(GestoreDocumenti.get_prossimo_id_documento(), 'fattura', id_prodotti, id_vernici,
+                              id_cliente)
         GestoreDocumenti.aggiungi_documento(documento)
         self.close()

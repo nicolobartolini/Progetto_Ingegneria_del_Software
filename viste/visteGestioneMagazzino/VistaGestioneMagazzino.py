@@ -54,7 +54,6 @@ class VistaGestioneMagazzino(QWidget):
         self.setWindowTitle("Gestione Magazzino")
         self.setMinimumSize(700, 900)
 
-
     def open_inserisci_prodotto(self):
         self.vista_inserisci_prodotto = VistaInserisciProdotto()
         self.vista_inserisci_prodotto.show()
@@ -73,7 +72,8 @@ class VistaGestioneMagazzino(QWidget):
         self.lista_prodotti.clear()
         if len(lista_prodotti) != 0:
             for prodotto in lista_prodotti:
-                self.lista_prodotti.addItem(f'{str(prodotto["_id"])} | {str(prodotto["nome"])} | Giacenza: {str(prodotto["giacenza"])} | Prezzo: {str(prodotto["prezzo"])}')
+                self.lista_prodotti.addItem(
+                    f'{str(prodotto["_id"])} | {str(prodotto["nome"])} | Giacenza: {str(prodotto["giacenza"])} | Prezzo: {str(prodotto["prezzo"])}')
 
     def ricerca_lista_prodotti(self, tipo_ordinamento, decrescente):
         parametro = self.barra_ricerca.text()
@@ -83,7 +83,8 @@ class VistaGestioneMagazzino(QWidget):
         elif self.tipo_ricerca.currentText() == 'Ricerca per ID':
             lista_prodotti = GestoreMagazzino.ricerca_ordina_prodotti('_id', parametro, tipo_ordinamento, decrescente)
         elif self.tipo_ricerca.currentText() == 'Ricerca per fornitore':
-            lista_prodotti = GestoreMagazzino.ricerca_ordina_prodotti('fornitore', parametro, tipo_ordinamento, decrescente)
+            lista_prodotti = GestoreMagazzino.ricerca_ordina_prodotti('fornitore', parametro, tipo_ordinamento,
+                                                                      decrescente)
         self.set_lista_prodotti(lista_prodotti)
 
     def ordina_lista_prodotti(self):

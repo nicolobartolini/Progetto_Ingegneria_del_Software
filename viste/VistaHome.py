@@ -1,7 +1,6 @@
 from PyQt5.QtCore import QSize
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QLabel
 
-
 from viste.VistaMessaggioGenerico import VistaMessaggioGenerico
 from viste.visteGestioneClienti.VistaGestioneClienti import VistaGestioneClienti
 from viste.visteGestioneColorificio.VistaGestioneColorificio import VistaGestioneColorificio
@@ -59,7 +58,8 @@ class VistaHome(QWidget):
             self.vista_gestione_magazzino = VistaGestioneMagazzino()
             self.vista_gestione_magazzino.show()
         else:
-            self.messaggio_no_permessi = VistaMessaggioGenerico(msg='Non hai il ruolo adatto per accedere a questa sezione.')
+            self.messaggio_no_permessi = VistaMessaggioGenerico(
+                msg='Non hai il ruolo adatto per accedere a questa sezione.')
             self.messaggio_no_permessi.show()
 
     def open_colorificio(self):
@@ -67,7 +67,8 @@ class VistaHome(QWidget):
             self.vista_gestione_colorificio = VistaGestioneColorificio()
             self.vista_gestione_colorificio.show()
         else:
-            self.messaggio_no_permessi = VistaMessaggioGenerico(msg='Non hai il ruolo adatto per accedere a questa sezione.')
+            self.messaggio_no_permessi = VistaMessaggioGenerico(
+                msg='Non hai il ruolo adatto per accedere a questa sezione.')
             self.messaggio_no_permessi.show()
 
     def open_clienti(self):
@@ -75,7 +76,8 @@ class VistaHome(QWidget):
             self.vista_gestione_clienti = VistaGestioneClienti()
             self.vista_gestione_clienti.show()
         else:
-            self.messaggio_no_permessi = VistaMessaggioGenerico(msg='Non hai il ruolo adatto per accedere a questa sezione.')
+            self.messaggio_no_permessi = VistaMessaggioGenerico(
+                msg='Non hai il ruolo adatto per accedere a questa sezione.')
             self.messaggio_no_permessi.show()
 
     def open_documentazione(self):
@@ -83,7 +85,8 @@ class VistaHome(QWidget):
             self.vista_gestione_documentazione = VistaGestioneDocumentazione()
             self.vista_gestione_documentazione.show()
         else:
-            self.messaggio_no_permessi = VistaMessaggioGenerico(msg='Non hai il ruolo adatto per accedere a questa sezione.')
+            self.messaggio_no_permessi = VistaMessaggioGenerico(
+                msg='Non hai il ruolo adatto per accedere a questa sezione.')
             self.messaggio_no_permessi.show()
 
     def open_impiegati(self):
@@ -91,7 +94,8 @@ class VistaHome(QWidget):
             self.vista_gestione_impiegati = VistaGestioneImpiegati()
             self.vista_gestione_impiegati.show()
         else:
-            self.messaggio_no_permessi = VistaMessaggioGenerico(msg='Non hai il ruolo adatto per accedere a questa sezione.')
+            self.messaggio_no_permessi = VistaMessaggioGenerico(
+                msg='Non hai il ruolo adatto per accedere a questa sezione.')
             self.messaggio_no_permessi.show()
 
     def open_fornitori(self):
@@ -99,6 +103,6 @@ class VistaHome(QWidget):
             self.vista_lista_fornitori = VistaListaFornitori()
             self.vista_lista_fornitori.show()
         else:
-            self.messaggio_no_permessi = VistaMessaggioGenerico(msg='Non hai il ruolo adatto per accedere a questa sezione.')
+            self.messaggio_no_permessi = VistaMessaggioGenerico(
+                msg='Non hai il ruolo adatto per accedere a questa sezione.')
             self.messaggio_no_permessi.show()
-

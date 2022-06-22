@@ -27,7 +27,6 @@ class VistaStoricoVernici(QWidget):
         self.setWindowTitle("Storico vernici")
         self.setMinimumSize(700, 900)
 
-
     def open_inserisci_vernice(self):
         self.vista_inserisci_vernice = VistaInserisciVernice()
         self.vista_inserisci_vernice.show()

@@ -1,6 +1,5 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QHBoxLayout, QPushButton
 
-from gestione.GestoreColorificio import GestoreColorificio
 from gestione.GestoreImpiegati import GestoreImpiegati
 
 

@@ -46,7 +46,8 @@ class VistaInserisciVernice(QWidget):
         quantita_rosso = float(self.input_quantita_rosso.value())
         quantita_blu = float(self.input_quantita_blu.value())
         quantita_giallo = float(self.input_quantita_giallo.value())
-        nuova_vernice = Vernice(GestoreColorificio.get_prossimo_id_vernice(), descrizione, id_base, quantita_rosso, quantita_blu, quantita_giallo)
+        nuova_vernice = Vernice(GestoreColorificio.get_prossimo_id_vernice(), descrizione, id_base, quantita_rosso,
+                                quantita_blu, quantita_giallo)
         GestoreColorificio.aggiungi_vernice(nuova_vernice)
         self.messaggio_conferma = VistaMessaggioGenerico(msg='Vernice inserita con successo!')
         self.messaggio_conferma.show()

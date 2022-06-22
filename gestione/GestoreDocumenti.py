@@ -1,13 +1,8 @@
-import os
-import pickle as pk
-
 from Documento import Documento
-from Vernice import Vernice
 from gestione.GestoreClienti import GestoreClienti
 
 
 class GestoreDocumenti:
-
     collection_documenti = None
     database_documenti = []
 
@@ -43,4 +38,5 @@ class GestoreDocumenti:
 
     @staticmethod
     def get_oggetto_da_dict(documento_dict: dict):
-        return Documento(documento_dict['_id'], documento_dict['tipo'], documento_dict['id_prodotti'], documento_dict['id_vernici'], documento_dict['id_cliente'])
+        return Documento(documento_dict['_id'], documento_dict['tipo'], documento_dict['id_prodotti'],
+                         documento_dict['id_vernici'], documento_dict['id_cliente'])

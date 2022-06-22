@@ -112,7 +112,8 @@ class VistaScorteColorificio(QWidget):
         self.lista_basi.clear()
         if len(lista_basi) != 0:
             for base in lista_basi:
-                self.lista_basi.addItem(f'{str(base["_id"])} | {str(base["nome"])} | Giacenza: {str(base["giacenza"])} | Prezzo/L: {str(base["prezzo_al_litro"])} | Volume (L): {str(base["volume"])}')
+                self.lista_basi.addItem(
+                    f'{str(base["_id"])} | {str(base["nome"])} | Giacenza: {str(base["giacenza"])} | Prezzo/L: {str(base["prezzo_al_litro"])} | Volume (L): {str(base["volume"])}')
 
     def ricerca_lista_basi(self):
         parametro = self.barra_ricerca.text()

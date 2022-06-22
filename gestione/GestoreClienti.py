@@ -1,10 +1,5 @@
-from Cliente import Cliente
 from ClienteAzienda import ClienteAzienda
 from ClientePersona import ClientePersona
-from Dimensione import Dimensione
-from Fornitore import Fornitore
-from Prodotto import Prodotto
-from Ubicazione import Ubicazione
 
 
 class GestoreClienti:

@@ -36,4 +36,3 @@ class Impiegato:
 
     def set_ruolo(self, ruolo: str):
         self.ruolo = ruolo
-        

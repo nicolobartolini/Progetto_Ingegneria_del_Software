@@ -15,4 +15,3 @@ class Fornitore:
 
     def set_partitaIVA(self, partitaIVA: int):
         self.partitaIVA = partitaIVA
-

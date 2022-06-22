@@ -1,8 +1,6 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QHBoxLayout, QPushButton
 
-from gestione.GestoreColorificio import GestoreColorificio
 from gestione.GestoreFornitori import GestoreFornitori
-from gestione.GestoreImpiegati import GestoreImpiegati
 
 
 class VistaRimuoviFornitore(QWidget):
