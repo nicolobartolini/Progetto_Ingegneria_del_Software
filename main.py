@@ -1,8 +1,10 @@
 import sys
 
+import schedule as schedule
 from PyQt5.QtWidgets import QApplication
 from pymongo import MongoClient
 
+from gestione.GestoreBackup import GestoreBackup
 from gestione.GestoreClienti import GestoreClienti
 from gestione.GestoreColorificio import GestoreColorificio
 from gestione.GestoreDocumenti import GestoreDocumenti
@@ -10,6 +12,11 @@ from gestione.GestoreFornitori import GestoreFornitori
 from gestione.GestoreImpiegati import GestoreImpiegati
 from gestione.GestoreMagazzino import GestoreMagazzino
 from viste.VistaLogin import VistaLogin
+
+
+def backup():
+    GestoreBackup.effettua_backup()
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
@@ -33,5 +40,6 @@ if __name__ == '__main__':
     GestoreDocumenti.aggiorna_database_gestore_documenti()
     GestoreImpiegati.aggiorna_database_gestore_impiegati()
     GestoreFornitori.aggiorna_database_gestore_fornitori()
+    schedule.every().day.at("22:00").do(backup)
     vista_login.show()
     sys.exit(app.exec())
