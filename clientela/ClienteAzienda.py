@@ -1,4 +1,4 @@
-from Cliente import Cliente
+from clientela.Cliente import Cliente
 
 
 class ClienteAzienda(Cliente):
