@@ -1,34 +1,46 @@
 import os
 import pickle as pk
 
+from Documento import Documento
 from Vernice import Vernice
+from gestione.GestoreClienti import GestoreClienti
 
 
 class GestoreDocumenti:
 
     collection_documenti = None
+    database_documenti = []
 
     @staticmethod
-    def aggiorna_storico():
-        if os.path.isfile('dati/storico.pickle'):
-            with open('dati/storico.pickle', 'rb') as f:
-                GestoreVernici.storico_vernici = pk.load(f)
+    def aggiorna_database_gestore_documenti():
+        GestoreDocumenti.database_documenti = list(GestoreDocumenti.collection_documenti.find())
 
     @staticmethod
-    def inserisci_vernice(vernice: Vernice):
-        GestoreVernici.aggiorna_storico()
-        GestoreVernici.storico_vernici[vernice.get_id()] = vernice
-        with open('dati/storico.pickle', 'wb') as f:
-            pk.dump(GestoreVernici.storico_vernici, f, pk.HIGHEST_PROTOCOL)
+    def get_prossimo_id_documento():
+        if len(GestoreDocumenti.database_documenti) != 0:
+            GestoreDocumenti.aggiorna_database_gestore_documenti()
+            return GestoreDocumenti.database_documenti[-1]['_id'] + 1
+        else:
+            return 1
 
     @staticmethod
-    def rimuovi_vernice(id: int):
-        GestoreVernici.aggiorna_storico()
-        del GestoreVernici.storico_vernici[id]
-        with open('dati/storico.pickle', 'wb') as f:
-            pk.dump(GestoreVernici.storico_vernici, f, pk.HIGHEST_PROTOCOL)
+    def aggiungi_documento(documento: Documento):
+        GestoreDocumenti.collection_documenti.insert_one({
+            '_id': int(documento.get_id()),
+            'tipo': str(documento.get_tipo_documento()),
+            'nome': f'{documento.get_tipo_documento().capitalize()} {documento.get_id()}',
+            'pagamento': str(documento.get_pagamento()),
+            'id_prodotti': documento.get_id_prodotti(),
+            'id_vernici': documento.get_id_vernici(),
+            'id_cliente': documento.get_id_cliente()
+        })
+        GestoreClienti.aggiungi_documento_a_cliente(documento.get_id_cliente(), documento.get_id())
 
     @staticmethod
-    def get_storico_vernici():
-        GestoreVernici.aggiorna_storico()
-        return GestoreVernici.storico_vernici
+    def elimina_documento(id: int):
+        GestoreDocumenti.collection_documenti.delete_one({'_id': id})
+        GestoreDocumenti.aggiorna_database_gestore_documenti()
+
+    @staticmethod
+    def get_oggetto_da_dict(documento_dict: dict):
+        return Documento(documento_dict['_id'], documento_dict['tipo'], documento_dict['id_prodotti'], documento_dict['id_vernici'], documento_dict['id_cliente'])

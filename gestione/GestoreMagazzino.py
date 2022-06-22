@@ -57,9 +57,8 @@ class GestoreMagazzino:
     @staticmethod
     def diminuisci_giacenza_prodotto(id: int, quantita: int):
         GestoreMagazzino.aggiorna_database_gestore_prodotti()
-        prodotto = GestoreMagazzino.database_prodotti[id]
-        prodotto.set_giacenza(prodotto.get_giacenza() - quantita)
-        GestoreMagazzino.aggiungi_prodotto(prodotto)
+        GestoreMagazzino.collection_prodotti.update_one({'_id': id},
+                                                        {'$inc': {'giacenza': -1 * quantita}})
         GestoreMagazzino.aggiorna_database_gestore_prodotti()
 
     @staticmethod

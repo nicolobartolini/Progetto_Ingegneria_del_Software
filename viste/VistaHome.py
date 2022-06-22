@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QLab
 
 from viste.visteGestioneClienti.VistaGestioneClienti import VistaGestioneClienti
 from viste.visteGestioneColorificio.VistaGestioneColorificio import VistaGestioneColorificio
+from viste.visteGestioneDocumentazione.VistaGestioneDocumentazione import VistaGestioneDocumentazione
 from viste.visteGestioneMagazzino.VistaGestioneMagazzino import VistaGestioneMagazzino
 
 
@@ -54,7 +55,8 @@ class VistaHome(QWidget):
         self.vista_gestione_clienti.show()
 
     def open_documentazione(self):
-        pass
+        self.vista_gestione_documentazione = VistaGestioneDocumentazione()
+        self.vista_gestione_documentazione.show()
 
     def open_impiegati(self):
         pass

@@ -80,11 +80,11 @@ class GestoreClienti:
     def get_oggetto_da_dict(cliente_dict: dict):
         if cliente_dict['tipo'] == 'persona':
             return ClientePersona(cliente_dict['_id'], cliente_dict['indirizzo_email'], cliente_dict['telefono'],
-                                  cliente_dict['id_documenti'], cliente_dict['codice_fiscale'], cliente_dict['cognome'],
+                                  cliente_dict['documenti'], cliente_dict['codice_fiscale'], cliente_dict['cognome'],
                                   cliente_dict['nome'])
         elif cliente_dict['tipo'] == 'azienda':
             return ClienteAzienda(cliente_dict['_id'], cliente_dict['indirizzo_email'], cliente_dict['telefono'],
-                                  cliente_dict['id_documenti'], cliente_dict['marchionimo'], cliente_dict['partitaIVA'])
+                                  cliente_dict['documenti'], cliente_dict['marchionimo'], cliente_dict['partitaIVA'])
 
     @staticmethod
     def ricerca_ordina_clienti(tipo, parametro):
@@ -109,3 +109,9 @@ class GestoreClienti:
                 key=lambda prodotto: prodotto['partitaIVA'], reverse=False)
             risultato = risultato_persone + risultato_aziende
             return risultato
+
+    @staticmethod
+    def aggiungi_documento_a_cliente(id_cliente: int, id_documento: int):
+        GestoreClienti.collection_clienti.update_one({'_id': id_cliente},
+                                                     {'$push': {'documenti': id_documento}})
+        GestoreClienti.aggiorna_database_gestore_clienti()

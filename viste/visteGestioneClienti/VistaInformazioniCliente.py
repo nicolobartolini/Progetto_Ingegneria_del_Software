@@ -59,7 +59,7 @@ class VistaInformazioniCliente(QWidget):
     def set_lista_documenti(self, cliente: dict):
         if len(cliente['documenti']) != 0:
             for id_documento in cliente['documenti']:
-                documento = GestoreDocumenti.collection_documenti.find_one({'_id': id_documento})
+                documento = GestoreDocumenti.collection_documenti.find_one({'_id': int(id_documento)})
                 self.lista_documenti.addItem(f'{str(id_documento)} | {str(documento["nome"])} | Pagamento: {str(documento["pagamento"])}')
         else:
             self.lista_documenti.addItem('Nessun documento intestato al cliente')
