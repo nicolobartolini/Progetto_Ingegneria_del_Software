@@ -10,7 +10,7 @@ class GestoreColorificio:
     database_basi = []
     database_vernici = []
 
-    prezzo_al_litro_coloranti = 7.5  # VEDIAMO
+    prezzo_al_litro_coloranti = 7.5
     colorante_rosso = None
     colorante_blu = None
     colorante_giallo = None

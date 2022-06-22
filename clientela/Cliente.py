@@ -21,7 +21,7 @@ class Cliente:
     def set_telefono(self, telefono: str):
         self.telefono = telefono
 
-    def get_documenti(self) -> list[int]:
+    def get_id_documenti(self) -> list[int]:
         return self.id_documenti
 
     def set_documenti(self, documenti: list[int]):
