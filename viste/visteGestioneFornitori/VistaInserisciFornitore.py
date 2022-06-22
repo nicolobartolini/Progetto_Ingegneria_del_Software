@@ -1,7 +1,7 @@
 from PyQt5.QtCore import QSize
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QFormLayout, QLineEdit, QPushButton
 
-from Fornitore import Fornitore
+from generali.Fornitore import Fornitore
 from gestione.GestoreFornitori import GestoreFornitori
 from viste.VistaMessaggioGenerico import VistaMessaggioGenerico
 

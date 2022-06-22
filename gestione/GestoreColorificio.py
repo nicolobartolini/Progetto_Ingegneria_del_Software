@@ -1,6 +1,6 @@
-from Base import Base
-from Colorante import Colorante
-from Fornitore import Fornitore
+from colorificio.Base import Base
+from colorificio.Colorante import Colorante
+from generali.Fornitore import Fornitore
 
 
 class GestoreColorificio:

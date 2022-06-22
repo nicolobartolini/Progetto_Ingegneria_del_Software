@@ -2,11 +2,11 @@ from PyQt5.QtCore import QSize
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QFormLayout, QLineEdit, QPushButton, QTextEdit, \
     QDoubleSpinBox, QSpinBox
 
-from Dimensione import Dimensione
-from Fornitore import Fornitore
-from Prodotto import Prodotto
-from Ubicazione import Ubicazione
+from generali.Fornitore import Fornitore
 from gestione.GestoreMagazzino import GestoreMagazzino
+from magazzino.Dimensione import Dimensione
+from magazzino.Prodotto import Prodotto
+from magazzino.Ubicazione import Ubicazione
 from viste.VistaMessaggioGenerico import VistaMessaggioGenerico
 
 

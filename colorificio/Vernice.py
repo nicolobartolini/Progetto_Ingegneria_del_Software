@@ -40,5 +40,5 @@ class Vernice:
     def calcola_prezzo(self):
         base = GestoreColorificio.collection_basi.find_one({'_id': self.id_base})
         return round(base['prezzo_al_litro'] * base['volume'] + (
-                    self.quantita_blu + self.quantita_giallo + self.quantita_rosso) * GestoreColorificio.prezzo_al_litro_coloranti,
+                self.quantita_blu + self.quantita_giallo + self.quantita_rosso) * GestoreColorificio.prezzo_al_litro_coloranti,
                      2)

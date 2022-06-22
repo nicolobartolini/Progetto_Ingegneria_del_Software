@@ -1,7 +1,7 @@
-from Dimensione import Dimensione
-from Fornitore import Fornitore
-from Prodotto import Prodotto
-from Ubicazione import Ubicazione
+from generali.Fornitore import Fornitore
+from magazzino.Dimensione import Dimensione
+from magazzino.Prodotto import Prodotto
+from magazzino.Ubicazione import Ubicazione
 
 
 class GestoreMagazzino:

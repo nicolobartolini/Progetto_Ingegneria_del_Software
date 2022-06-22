@@ -2,11 +2,11 @@ from PyQt5.QtCore import QSize
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QFormLayout, QLineEdit, QPushButton, QTextEdit, \
     QDoubleSpinBox, QSpinBox
 
-from Dimensione import Dimensione
-from Fornitore import Fornitore
-from Prodotto import Prodotto
-from Ubicazione import Ubicazione
+from generali.Fornitore import Fornitore
 from gestione.GestoreMagazzino import GestoreMagazzino
+from magazzino.Dimensione import Dimensione
+from magazzino.Prodotto import Prodotto
+from magazzino.Ubicazione import Ubicazione
 from viste.VistaMessaggioGenerico import VistaMessaggioGenerico
 
 
@@ -41,7 +41,6 @@ class VistaInserisciProdotto(QWidget):
         self.input_peso = QDoubleSpinBox()
         self.input_peso.setMaximum(1000.0)
         self.input_note = QTextEdit()
-        # FORNITORE
         self.f_layout.addRow('Nome:', self.input_nome)
         self.f_layout.addRow('Prezzo:', self.input_prezzo)
         self.f_layout.addRow('Giacenza:', self.input_giacenza)

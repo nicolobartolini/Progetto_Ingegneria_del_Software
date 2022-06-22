@@ -1,4 +1,4 @@
-from Documento import Documento
+from generali.Documento import Documento
 from gestione.GestoreClienti import GestoreClienti
 
 

@@ -1,8 +1,8 @@
 from PyQt5.QtCore import QSize
 from PyQt5.QtWidgets import QWidget, QPushButton, QVBoxLayout, QFormLayout, QComboBox, QListWidget
 
-from Documento import Documento
-from Vernice import Vernice
+from colorificio.Vernice import Vernice
+from generali.Documento import Documento
 from gestione.GestoreClienti import GestoreClienti
 from gestione.GestoreColorificio import GestoreColorificio
 from gestione.GestoreDocumenti import GestoreDocumenti

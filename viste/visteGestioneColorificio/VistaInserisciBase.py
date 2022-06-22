@@ -2,8 +2,8 @@ from PyQt5.QtCore import QSize
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QFormLayout, QLineEdit, QPushButton, QDoubleSpinBox, QSpinBox, \
     QComboBox
 
-from Base import Base
-from Fornitore import Fornitore
+from colorificio.Base import Base
+from generali.Fornitore import Fornitore
 from gestione.GestoreColorificio import GestoreColorificio
 from viste.VistaMessaggioGenerico import VistaMessaggioGenerico
 

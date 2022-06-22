@@ -1,5 +1,5 @@
-from Documento import Documento
-from Impiegato import Impiegato
+from generali.Documento import Documento
+from generali.Impiegato import Impiegato
 
 
 class GestoreImpiegati:

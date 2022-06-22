@@ -1,5 +1,5 @@
-from ClienteAzienda import ClienteAzienda
-from ClientePersona import ClientePersona
+from clientela.ClienteAzienda import ClienteAzienda
+from clientela.ClientePersona import ClientePersona
 
 
 class GestoreClienti:

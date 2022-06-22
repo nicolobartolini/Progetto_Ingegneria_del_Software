@@ -1,4 +1,4 @@
-from Fornitore import Fornitore
+from generali.Fornitore import Fornitore
 
 
 class Base:

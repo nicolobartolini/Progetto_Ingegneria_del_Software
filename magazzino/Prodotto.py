@@ -2,12 +2,12 @@ import datetime
 
 import qrcode as qr
 
-from Dimensione import Dimensione
-from Fornitore import Fornitore
-from Ubicazione import Ubicazione
+from magazzino.Dimensione import Dimensione
+from magazzino.Ubicazione import Ubicazione
+from generali.Fornitore import Fornitore
 
 
-class Prodotto():
+class Prodotto:
 
     def __init__(self, id: int, nome: str, giacenza: int, prezzo: float, ubicazione: Ubicazione, dimensione: Dimensione,
                  fornitore: Fornitore, note: str):
